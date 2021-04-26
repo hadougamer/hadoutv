@@ -1,0 +1,87 @@
+[gd_scene load_steps=14 format=2]
+
+[ext_resource path="res://Textures/TileSet.tres" type="TileSet" id=1]
+[ext_resource path="res://Sprites/hero-walking.png" type="Texture" id=2]
+[ext_resource path="res://Scripts/Player.gd" type="Script" id=3]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 525.618, 34.1902 )
+
+[sub_resource type="AtlasTexture" id=2]
+atlas = ExtResource( 2 )
+region = Rect2( 16, 16, 16, 16 )
+
+[sub_resource type="AtlasTexture" id=3]
+atlas = ExtResource( 2 )
+region = Rect2( 0, 0, 16, 16 )
+
+[sub_resource type="AtlasTexture" id=4]
+atlas = ExtResource( 2 )
+region = Rect2( 16, 0, 16, 16 )
+
+[sub_resource type="AtlasTexture" id=5]
+atlas = ExtResource( 2 )
+region = Rect2( 0, 16, 16, 16 )
+
+[sub_resource type="AtlasTexture" id=6]
+atlas = ExtResource( 2 )
+region = Rect2( 16, 16, 16, 16 )
+
+[sub_resource type="AtlasTexture" id=7]
+atlas = ExtResource( 2 )
+region = Rect2( 0, 32, 16, 16 )
+
+[sub_resource type="AtlasTexture" id=8]
+atlas = ExtResource( 2 )
+region = Rect2( 0, 0, 16, 16 )
+
+[sub_resource type="SpriteFrames" id=9]
+animations = [ {
+"frames": [ SubResource( 2 ) ],
+"loop": true,
+"name": "idle",
+"speed": 1.0
+}, {
+"frames": [ SubResource( 3 ), SubResource( 4 ), SubResource( 5 ), SubResource( 6 ), SubResource( 7 ) ],
+"loop": true,
+"name": "walking",
+"speed": 12.0
+}, {
+"frames": [ SubResource( 8 ) ],
+"loop": true,
+"name": "jump",
+"speed": 1.0
+} ]
+
+[sub_resource type="RectangleShape2D" id=10]
+extents = Vector2( 35.6953, 39.6962 )
+
+[node name="Main" type="Node2D"]
+
+[node name="Body" type="StaticBody2D" parent="."]
+
+[node name="TileMap" type="TileMap" parent="Body"]
+scale = Vector2( 2, 2 )
+tile_set = ExtResource( 1 )
+cell_size = Vector2( 32, 32 )
+format = 1
+tile_data = PoolIntArray( 131082, 5, 0, 131084, 5, 0, 131086, 5, 0, 262148, 1, 0, 262149, 1, 0, 262150, 1, 0, 262151, 1, 0, 327684, 1, 0, 327685, 1, 0, 327686, 1, 0, 327687, 1, 0, 393219, 2, 0, 393220, 1, 0, 393221, 1, 0, 393222, 1, 0, 393223, 1, 0, 458754, 2, 0, 458755, 2, 0, 458756, 1, 0, 458757, 1, 0, 458758, 1, 0, 458759, 1, 0, 524289, 2, 0, 524290, 2, 0, 524291, 2, 0, 524292, 1, 0, 524293, 1, 0, 524294, 1, 0, 524295, 1, 0, 524297, 3, 0, 524298, 4, 0, 524301, 3, 0, 524302, 4, 0, 589824, 0, 0, 589825, 0, 0, 589826, 0, 0, 589827, 0, 0, 589828, 0, 0, 589829, 0, 0, 589830, 0, 0, 589831, 0, 0, 589832, 0, 0, 589833, 0, 0, 589834, 0, 0, 589835, 0, 0, 589836, 0, 0, 589837, 0, 0, 589838, 0, 0, 589839, 0, 0 )
+
+[node name="Shape" type="CollisionShape2D" parent="Body"]
+position = Vector2( 511.58, 609.743 )
+shape = SubResource( 1 )
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Body"]
+polygon = PoolVector2Array( 65, 571, 67, 515, 67, 515, 126, 514, 130, 446, 191, 446, 189, 380, 253, 383, 257, 575 )
+
+[node name="Player" type="KinematicBody2D" parent="."]
+position = Vector2( 749.805, 480.414 )
+script = ExtResource( 3 )
+
+[node name="Sprite" type="AnimatedSprite" parent="Player"]
+scale = Vector2( 5, 5 )
+frames = SubResource( 9 )
+animation = "idle"
+
+[node name="Shape" type="CollisionShape2D" parent="Player"]
+shape = SubResource( 10 )
